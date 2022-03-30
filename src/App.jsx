@@ -2,8 +2,9 @@
 import { useEffect, useState } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
+
 import Header from './components/Header'
-import Homepage from './pages/Homepage'
+import Homepage from './pages/homepage/Homepage'
 import Login from './pages/Login'
 import Register from './pages/Register'
 
@@ -38,6 +39,7 @@ function App() {
 
   return (
     <div className="App">
+
       <Header user={user} setUser={setUser} />
       <Routes>
         <Route index element={<Navigate replace to='/homepage' />} />

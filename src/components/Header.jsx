@@ -1,7 +1,17 @@
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import LeftDrawer from "./Drawer";
+
 
 function Header({ user, setUser }) {
     const navigate = useNavigate()
+    const [open, setOpen] = useState(false);
+
+
+
+    const handleDrawer = () => {
+        setOpen(!open)
+    }
 
     function logout() {
         localStorage.removeItem('token')
@@ -11,7 +21,7 @@ function Header({ user, setUser }) {
     return (
         <header>
             <div className="logo">
-                <button className="hamburger-icon"> <img src="src/assets/menu.svg" alt="Hamburger icon" /></button>
+                <button className="hamburger-icon" onClick={handleDrawer}> <img src="src/assets/menu.svg" alt="Hamburger icon" /></button>
                 <button className="youtube-logo"> <img src="src/assets/logo.svg" alt="Youtube Logo" /></button>
             </div>
 
@@ -23,6 +33,7 @@ function Header({ user, setUser }) {
                 <img src="src/assets/profile.svg" alt="profile" />
                 <span>Sign in</span>
             </button>}
+            <LeftDrawer open={open} handleDrawer={handleDrawer} />
         </header>
     )
 }
