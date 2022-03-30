@@ -7,6 +7,7 @@ import Header from './components/Header'
 import Homepage from './pages/homepage/Homepage'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import VideoDetails from './pages/videodetails/VideoDetails'
 
 
 
@@ -46,6 +47,7 @@ function App() {
         <Route path='/homepage' element={<Homepage />} />
         <Route path='/login' element={<Login setUser={setUser} />} />
         <Route path='/signup' element={<Register setUser={setUser} />} />
+        <Route path='/homepage/:id' element={<VideoDetails />} />
       </Routes>
     </div>
   )
