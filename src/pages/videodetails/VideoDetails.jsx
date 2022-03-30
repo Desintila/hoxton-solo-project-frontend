@@ -1,14 +1,14 @@
 import './videodetails.css'
 function VideoDetails() {
     return (
-        <main>
-            <div className="video">
+        <main className='details-page'>
+            <div className="selected-video">
                 <iframe width="720" height="380" src="https://www.youtube.com/embed/U3ASj1L6_sY" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
                 <div className="video-title">
                     <a href="#">#Adele #EasyOnMe</a>
                     <h3>Adele - Easy On Me (Official Video)</h3>
-                    <div className="video-info">
-                        <span>260,588,400 viewsPremiered Oct 15, 2021</span>
+                    <div className="date">
+                        <span>260,588,400 views · Premiered Oct 15, 2021</span>
                         <div className="user-actions">
                             <ul>
                                 <li><button> <img src="../src/assets/like.svg" alt="" /></button>6M</li>

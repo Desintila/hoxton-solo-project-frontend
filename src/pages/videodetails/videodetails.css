@@ -1,10 +1,10 @@
-main{
+.details-page{
     background-color: #f9f9f9;
     display: grid;
     grid-template-columns: 3fr 1.5fr;
     gap: 20px;
 }
-.video{
+.selected-video{
     margin-top: 2rem;
     margin-left: 6rem;
     display: grid;
@@ -13,7 +13,7 @@ main{
     align-self: start;
 }
 
-.video-info{
+.date{
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
@@ -44,7 +44,7 @@ main{
     font-family: sans-serif;
     
 }
-.video-info span{
+.date span{
     color: #606060;
     font-size: 14px;
     font-family: sans-serif;
