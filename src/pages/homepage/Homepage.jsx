@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import Aside from "../../components/Aside"
 import './homepage.css'
 function Homepage() {
     const [videos, setVideos] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetch('http://localhost:4000/videos')
             .then(resp => resp.json())
             .then(videos => setVideos(videos))
     }, [])
+    console.log(videos)
 
 
     return (
@@ -17,96 +20,29 @@ function Homepage() {
 
             <Aside />
             <section className="content">
-                <article className="video">
+                {
+                    videos.map(video =>
+                        <article key={video.id} className="video" onClick={() => navigate(`/homepage/${video.id}`)}>
 
-                    <img className="thumbnail" src="https://i.ytimg.com/vi/U3ASj1L6_sY/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBAUy4A8HQ0WMoqqFsTcuOSrLTguA" alt="" />
+                            <img className="thumbnail" src={video.thumbnail} alt="" />
 
-                    <div className="video-details">
+                            <div className="video-details">
 
-                        <img className="video-avatar" src="https://yt3.ggpht.com/YuRHl_4murHobFsrHDkpJANVHzXYTgP68zysfrsNPIRMr8fKSzEP_4y6cFeE5WfpWOdxVH4sO-8=s176-c-k-c0x00ffffff-no-rj" alt="" />
+                                <img className="video-avatar" src={video.user.image} alt="" />
 
-                        <div className="video-info">
-                            <h3 className="title">Adele-Easy On Me</h3>
-                            <div className="info">
-                                <div className="channel-name">Adele</div>
-                                <div className="views">260M Views · 5months ago</div>
+                                <div className="video-info">
+                                    <h3 className="title">{video.title}</h3>
+                                    <div className="info">
+                                        <div className="channel-name">{video.user.firstName}</div>
+                                        <div className="views">260M Views · {video.createdAt}</div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                </article>
-                <article className="video">
+                        </article>
+                    )
+                }
 
-                    <img className="thumbnail" src="https://i.ytimg.com/vi/U3ASj1L6_sY/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBAUy4A8HQ0WMoqqFsTcuOSrLTguA" alt="" />
-
-                    <div className="video-details">
-
-                        <img className="video-avatar" src="https://yt3.ggpht.com/YuRHl_4murHobFsrHDkpJANVHzXYTgP68zysfrsNPIRMr8fKSzEP_4y6cFeE5WfpWOdxVH4sO-8=s176-c-k-c0x00ffffff-no-rj" alt="" />
-
-                        <div className="video-info">
-                            <h3 className="title">Adele-Easy On Me</h3>
-                            <div className="info">
-                                <div className="channel-name">Adele</div>
-                                <div className="views">260M Views · 5months ago</div>
-                            </div>
-                        </div>
-                    </div>
-
-                </article>
-                <article className="video">
-
-                    <img className="thumbnail" src="https://i.ytimg.com/vi/U3ASj1L6_sY/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBAUy4A8HQ0WMoqqFsTcuOSrLTguA" alt="" />
-
-                    <div className="video-details">
-
-                        <img className="video-avatar" src="https://yt3.ggpht.com/YuRHl_4murHobFsrHDkpJANVHzXYTgP68zysfrsNPIRMr8fKSzEP_4y6cFeE5WfpWOdxVH4sO-8=s176-c-k-c0x00ffffff-no-rj" alt="" />
-
-                        <div className="video-info">
-                            <h3 className="title">Adele-Easy On Me</h3>
-                            <div className="info">
-                                <div className="channel-name">Adele</div>
-                                <div className="views">260M Views · 5months ago</div>
-                            </div>
-                        </div>
-                    </div>
-
-                </article>
-                <article className="video">
-
-                    <img className="thumbnail" src="https://i.ytimg.com/vi/U3ASj1L6_sY/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBAUy4A8HQ0WMoqqFsTcuOSrLTguA" alt="" />
-
-                    <div className="video-details">
-
-                        <img className="video-avatar" src="https://yt3.ggpht.com/YuRHl_4murHobFsrHDkpJANVHzXYTgP68zysfrsNPIRMr8fKSzEP_4y6cFeE5WfpWOdxVH4sO-8=s176-c-k-c0x00ffffff-no-rj" alt="" />
-
-                        <div className="video-info">
-                            <h3 className="title">Adele-Easy On Me</h3>
-                            <div className="info">
-                                <div className="channel-name">Adele</div>
-                                <div className="views">260M Views · 5months ago</div>
-                            </div>
-                        </div>
-                    </div>
-
-                </article>
-                <article className="video">
-
-                    <img className="thumbnail" src="https://i.ytimg.com/vi/U3ASj1L6_sY/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBAUy4A8HQ0WMoqqFsTcuOSrLTguA" alt="" />
-
-                    <div className="video-details">
-
-                        <img className="video-avatar" src="https://yt3.ggpht.com/YuRHl_4murHobFsrHDkpJANVHzXYTgP68zysfrsNPIRMr8fKSzEP_4y6cFeE5WfpWOdxVH4sO-8=s176-c-k-c0x00ffffff-no-rj" alt="" />
-
-                        <div className="video-info">
-                            <h3 className="title">Adele-Easy On Me</h3>
-                            <div className="info">
-                                <div className="channel-name">Adele</div>
-                                <div className="views">260M Views · 5months ago</div>
-                            </div>
-                        </div>
-                    </div>
-
-                </article>
             </section>
 
         </main>

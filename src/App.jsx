@@ -47,7 +47,7 @@ function App() {
         <Route path='/homepage' element={<Homepage />} />
         <Route path='/login' element={<Login setUser={setUser} />} />
         <Route path='/signup' element={<Register setUser={setUser} />} />
-        <Route path='/homepage/:id' element={<VideoDetails />} />
+        <Route path='/homepage/:id' element={<VideoDetails user={user} />} />
       </Routes>
     </div>
   )
