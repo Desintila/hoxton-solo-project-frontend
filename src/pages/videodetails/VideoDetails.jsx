@@ -56,6 +56,42 @@ function VideoDetails({ user }) {
         }
     }
 
+    function addComment(event, id) {
+        event.preventDefault()
+        const commentText = event.target.comment.value
+        fetch('http://localhost:4000/comments', {
+            method: 'POST',
+            headers: {
+                Authorization: localStorage.token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ commentText: commentText, videoId: id })
+        })
+            .then(resp => resp.json())
+            .then((data) => {
+                const updated = JSON.parse(JSON.stringify(video))
+                updated.comments.push(data)
+                setVideo(updated)
+            })
+    }
+
+
+    function watch(video) {
+        fetch('http://localhost:4000/watch_later', {
+            method: 'POST',
+            headers: {
+                Authorization: localStorage.token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ videoId: video.id })
+        })
+            .then(resp => resp.json())
+            .then((data) => {
+                const updated = JSON.parse(JSON.stringify(video))
+                updated.comments.push(data)
+                setVideo(updated)
+            })
+    }
 
 
     console.log(video)
@@ -73,8 +109,8 @@ function VideoDetails({ user }) {
                             <ul>
                                 <li><button onClick={() => like(video)}> <img src="../src/assets/like.svg" alt="" /></button>{video.video_likes.length}</li>
                                 <li><button onClick={() => dislike(video)}><img src="../src/assets/dislike.svg" alt="dislike icon" /></button>DISLIKE</li>
-                                <li><button><img src="../src/assets/share.svg" alt="share icon" /> </button>SHARE</li>
-                                <li><button><img src="../src/assets/save.svg" alt="save icon" /></button>SAVE</li>
+                                <li><button ><img src="../src/assets/share.svg" alt="share icon" /> </button>SHARE</li>
+                                <li><button onClick={() => watch(video)}><img src="../src/assets/save.svg" alt="save icon" /></button>SAVE</li>
                             </ul>
                         </div>
                     </div>
@@ -86,6 +122,19 @@ function VideoDetails({ user }) {
                         <p>{video.description}</p>
                     </div>
                     <button>SUBSCRIBE</button>
+                </div>
+                <div className='video-comments'>
+                    <div>
+                        <form className="comment-form" onSubmit={(event) => addComment(event, video.id)}>
+                            <input type="text"
+                                name="comment"
+                                className="comment-input"
+                                placeholder="Add a comment" />
+                            <button className="comment-button" type="submit">ADD</button>
+                        </form>
+                        <h5>Comments</h5>
+                        <div>{video.comments.map(comment => <p key={comment.id}>{comment.commentText}</p>)}</div>
+                    </div>
                 </div>
             </div>
             <div className="recommendations">
