@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import './videodetails.css'
 
-function VideoDetails({ user }) {
+function VideoDetails({ user, setUser, watchLater, setWatchLater }) {
     const [video, setVideo] = useState(null)
     const params = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetch(`http://localhost:4000/videos/${params.id}`)
@@ -87,11 +88,28 @@ function VideoDetails({ user }) {
         })
             .then(resp => resp.json())
             .then((data) => {
-                const updated = JSON.parse(JSON.stringify(video))
-                updated.comments.push(data)
-                setVideo(updated)
+                const updated = JSON.parse(JSON.stringify(watchLater))
+
+                updated.push(data)
+                setWatchLater(updated)
+
             })
     }
+
+    function subscribe(user) {
+        fetch(`http://localhost:4000/subscribe`, {
+            method: 'PATCH',
+            headers: {
+                Authorization: localStorage.token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ subscribeId: user.id })
+        }).then(resp => resp.json())
+            .then(updatedUser => setUser(updatedUser))
+
+    }
+
+
 
 
     console.log(video)
@@ -107,10 +125,10 @@ function VideoDetails({ user }) {
                         <span>260,588,400 views · {video.createdAt}</span>
                         <div className="user-actions">
                             <ul>
-                                <li><button onClick={() => like(video)}> <img src="../src/assets/like.svg" alt="" /></button>{video.video_likes.length}</li>
-                                <li><button onClick={() => dislike(video)}><img src="../src/assets/dislike.svg" alt="dislike icon" /></button>DISLIKE</li>
-                                <li><button ><img src="../src/assets/share.svg" alt="share icon" /> </button>SHARE</li>
-                                <li><button onClick={() => watch(video)}><img src="../src/assets/save.svg" alt="save icon" /></button>SAVE</li>
+                                <li><button onClick={() => like(video)} className='icons'> <img src="../src/assets/like.svg" alt="" /></button>{video.video_likes.length}</li>
+                                <li><button onClick={() => dislike(video)} className='icons'> <img src="../src/assets/dislike.svg" alt="dislike icon" /></button>DISLIKE</li>
+                                <li><button className='icons'><img src="../src/assets/share.svg" alt="share icon" /> </button>SHARE</li>
+                                <li><button onClick={() => watch(video)} className='icons'><img src="../src/assets/save.svg" alt="save icon" /></button>SAVE</li>
                             </ul>
                         </div>
                     </div>
@@ -121,7 +139,7 @@ function VideoDetails({ user }) {
                         <h4>{video.user.firstName}</h4>
                         <p>{video.description}</p>
                     </div>
-                    <button>SUBSCRIBE</button>
+                    <button onClick={() => subscribe(video.user)}>SUBSCRIBE</button>
                 </div>
                 <div className='video-comments'>
                     <div>

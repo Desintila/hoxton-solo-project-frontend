@@ -8,14 +8,16 @@ import Homepage from './pages/homepage/Homepage'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import VideoDetails from './pages/videodetails/VideoDetails'
+import Liked from './pages/WatchLater/LikedVideos'
+import Watch from './pages/WatchLater/Watch'
 
 
 
 function App() {
 
   const [user, setUser] = useState(null)
-
-
+  const [watchLater, setWatchLater] = useState([])
+  const [likedVideos, setLikedVideos] = useState([])
 
 
   useEffect(() => {
@@ -47,7 +49,9 @@ function App() {
         <Route path='/homepage' element={<Homepage />} />
         <Route path='/login' element={<Login setUser={setUser} />} />
         <Route path='/signup' element={<Register setUser={setUser} />} />
-        <Route path='/homepage/:id' element={<VideoDetails user={user} />} />
+        <Route path='/homepage/:id' element={<VideoDetails user={user} setUser={setUser} watchLater={watchLater} setWatchLater={setWatchLater} />} />
+        <Route path='/watchlater' element={<Watch watchLater={watchLater} setWatchLater={setWatchLater} />} />
+        <Route path='/liked' element={<Liked likedVideos={likedVideos} setLikedVideos={setLikedVideos} />} />
       </Routes>
     </div>
   )

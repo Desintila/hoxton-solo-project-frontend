@@ -1,0 +1,23 @@
+.watch-later {
+    display: grid;
+    background-color: #f9f9f9;
+    border: 1px solid black;
+
+}
+
+img {
+    width: 100%;
+}
+
+.watch-wrapper {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    padding: 1rem 2rem;
+
+    border: 1px solid black;
+
+}
+
+.watch {
+    padding: 1rem;
+}

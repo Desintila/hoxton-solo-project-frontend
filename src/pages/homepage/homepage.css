@@ -1,77 +1,62 @@
-main{
-    background-color:#ffffff;
+main {
+    background-color: #ffffff;
     display: grid;
     grid-template-columns: 90px 1fr;
-    
-  }
-  
-.content{
+
+}
+
+.content {
     display: grid;
-    background-color:#f9f9f9;
+    background-color: #f9f9f9;
     grid-template-columns: repeat(auto-fit, minmax(230px, 260px));
     gap: 25px;
     padding-left: 2rem;
     padding-top: 1.5rem;
 }
-  
-.video{
+
+.video {
     display: grid;
     grid-template-rows: 160px 100px;
     gap: 10px;
-  
+
 }
-  
-.video-details{
+
+.video-details {
     display: grid;
     grid-template-columns: 40px 1fr;
     gap: 10px;
 }
-.thumbnail{
+
+.thumbnail {
     width: 100%;
 }
-.video-avatar{
+
+.video-avatar {
     border-radius: 50%;
     width: 100%;
 }
-.video-info{
+
+.video-info {
     display: grid;
     grid-template-rows: auto 1fr;
     gap: 0.7rem;
 }
-.info{
+
+.info {
     display: grid;
     grid-template-rows: auto 1fr;
     gap: 5px;
 }
-.title{
+
+.title {
     color: #030303;
     font-size: 14px;
     font-family: sans-serif;
 }
-.views, .channel-name{
+
+.views,
+.channel-name {
     color: #606060;
     font-family: sans-serif;
     font-size: 12px;
 }
-.menu{
-    display: grid;
-    gap: 15px;
-    position: sticky;
-    top: 4rem;
-    left: 0;
-}
-.menu ul{
-    list-style: none;
-}
-.menu li{
-    display: grid;
-    text-align: center;
-    font-size: 0.7rem;
-    padding: 10px;
-}
-.menu li:hover{
-    background-color: rgb(202, 199, 199);
-}
-  
-  
-  
