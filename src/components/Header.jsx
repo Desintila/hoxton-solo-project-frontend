@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import LeftDrawer from "./Drawer";
 
 
-function Header({ user, setUser }) {
+function Header({ user, setUser, searched, setSearch }) {
     const navigate = useNavigate()
     const [open, setOpen] = useState(false);
 
@@ -18,14 +18,34 @@ function Header({ user, setUser }) {
         setUser(null)
     }
 
+    function search(event) {
+        event.preventDefault()
+        const searchedText = event.target.searchInput.value
+        fetch('http://localhost:4000/search', {
+            method: 'POST',
+            headers: {
+                Authorization: localStorage.token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ searchedText: searchedText })
+        })
+            .then(resp => resp.json())
+            .then((data) => setSearch(data))
+        navigate('/search')
+    }
+
+
+
+    console.log(searched)
     return (
         <header>
             <div className="logo">
                 <button className="hamburger-icon" onClick={handleDrawer}> <img src="src/assets/menu.svg" alt="Hamburger icon" /></button>
                 <button className="youtube-logo"> <img src="src/assets/logo.svg" alt="Youtube Logo" /></button>
             </div>
-
-            <input type="search" placeholder="Search" className="search" />
+            <form onSubmit={(event) => search(event)}>
+                <input type="search" placeholder="Search" name="searchInput" className="search" />
+            </form>
             {user ? <div>
                 <h4>{user.firstName}{user.lastName}</h4>
                 <button onClick={() => logout()}>Logout</button>
