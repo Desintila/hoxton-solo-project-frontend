@@ -6,6 +6,7 @@ import './App.css'
 import Header from './components/Header'
 import Homepage from './pages/homepage/Homepage'
 import Login from './pages/Login'
+import Profile from './pages/Profile'
 import Register from './pages/Register'
 import SearchPage from './pages/Search/SearchPage'
 import VideoDetails from './pages/videodetails/VideoDetails'
@@ -54,6 +55,7 @@ function App() {
         <Route path='/watchlater' element={<Watch watchLater={watchLater} setWatchLater={setWatchLater} />} />
         <Route path='/liked' element={<Liked likedVideos={likedVideos} setLikedVideos={setLikedVideos} />} />
         <Route path='/search' element={<SearchPage searched={searched} setSearch={setSearch} />} />
+        <Route path='/profile' element={<Profile />} />
       </Routes>
     </div>
   )
