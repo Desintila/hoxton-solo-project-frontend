@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Aside from "../components/Aside";
+import Tabs from "../components/Tabs";
 
-function Profile() {
+function Profile({ user }) {
     const [file, setFile] = useState(null)
     const [title, setTitle] = useState("")
     const [thumbnail, setThumbnail] = useState("")
@@ -31,18 +32,22 @@ function Profile() {
 
 
     }
-
+    console.log(user)
     return (
         <main>
             <Aside />
             <section>
-                <form onSubmit={onSubmit} >
-                    <input type="file" name="file" onChange={onInputChange} />
-                    <input type="text" name="text" onChange={e => setTitle(e.target.value)} />
-                    <input type="text" name="thumbnail" onChange={e => setThumbnail(e.target.value)} />
-                    <input type="text" name="description" onChange={e => setDescription(e.target.value)} />
-                    <button>Submit</button>
-                </form>
+                <div className="user-info" >
+
+                    <img className="video-avatar" src={user.image} alt="" />
+                    <div >
+                        <div >{user.firstName}</div>  <div >{user.lastName}</div>
+                        <h3>{user.subscribedBy.length} subscribers </h3>
+                    </div>
+
+                </div>
+                <Tabs user={user} onSubmit={onSubmit} onInputChange={onInputChange} setTitle={setTitle} setDescription={setDescription} setThumbnail={setThumbnail} />
+
 
             </section>
         </main>

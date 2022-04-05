@@ -2,8 +2,8 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Aside from "../../components/Aside"
 import './homepage.css'
-function Homepage() {
-    const [videos, setVideos] = useState([])
+function Homepage({ videos, setVideos }) {
+
     const navigate = useNavigate()
 
     useEffect(() => {

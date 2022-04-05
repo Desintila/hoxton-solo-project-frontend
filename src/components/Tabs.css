@@ -1,0 +1,80 @@
+.tab-menu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.tab {
+    padding: 0.5rem;
+    background-color: white;
+    color: #666666;
+    font-size: 1.5rem;
+    border: none;
+}
+
+.active-tab {
+    border-bottom: 1px solid rgb(77, 131, 218);
+    color: rgb(77, 131, 218);
+}
+
+.c {
+    padding: 1rem;
+    display: none;
+}
+
+.active-content {
+    display: block;
+}
+
+.description-section {
+    font-family: sans-serif;
+    font-size: 1.3rem;
+    text-decoration: underline;
+}
+
+.description {
+    font-family: sans-serif;
+    font-size: 1rem;
+    padding: 1rem 0;
+    font-weight: 400px;
+    line-height: 30px;
+}
+
+.details-list {
+    list-style: none;
+    padding: 1rem 0;
+    font-family: sans-serif;
+}
+
+.value {
+    color: #0175a0;
+    font-size: 1.1rem;
+}
+
+.detail {
+    padding: 0.6rem 0;
+    font-size: 1.1rem;
+}
+
+.file,
+.title-video,
+.description-video,
+.thumbnail-video {
+    display: block;
+    padding: 5px;
+    margin-top: 0.5rem;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+.submit {
+    margin-top: 0.5rem;
+    height: 20px;
+    color: #fff;
+    background-color: #0074b1;
+    border-radius: 5px;
+    width: 5rem;
+    justify-items: center;
+    margin-left: 3rem;
+    border: 1px;
+}

@@ -72,3 +72,8 @@ input:focus {
 .menu li:hover {
   background-color: rgb(202, 199, 199);
 }
+
+.user-info {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+}

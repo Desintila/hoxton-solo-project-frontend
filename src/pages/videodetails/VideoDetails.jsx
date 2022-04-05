@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import './videodetails.css'
 
-function VideoDetails({ user, setUser, watchLater, setWatchLater }) {
+function VideoDetails({ user, setUser, watchLater, setWatchLater, videos }) {
     const [video, setVideo] = useState(null)
     const params = useParams()
     const navigate = useNavigate()
@@ -117,7 +117,10 @@ function VideoDetails({ user, setUser, watchLater, setWatchLater }) {
     return (
         <main className='details-page'>
             <div className="selected-video">
-                <iframe width="720" height="380" src={video.url} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
+                <video controls width="720" height="380" autoPlay>
+
+                    <source src="http://localhost:4000/public/video1.mp4" type="video/mp4" />
+                </video>
                 <div className="video-title">
                     <a href="#">#Adele #EasyOnMe</a>
                     <h3>{video.title}</h3>
@@ -156,33 +159,16 @@ function VideoDetails({ user, setUser, watchLater, setWatchLater }) {
                 </div>
             </div>
             <div className="recommendations">
-                <div className="chat">
-                    Chat Replay is disabled for this Premiere.
-                </div>
-                <div className="recommendation-video">
-                    <img className="thumbnail" src="https://i.ytimg.com/vi/U3ASj1L6_sY/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBAUy4A8HQ0WMoqqFsTcuOSrLTguA" alt="" />
-                    <div className="recommendation-info">
-                        <h4 className="title">Adele-Easy On Me</h4>
-                        <p className="info">Adele</p>
-                        <p className="info">260M Views · 5months ago </p>
+                {videos.map(video =>
+                    <div className="recommendation-video">
+                        <img className="thumbnail" src={video.thumbnail} alt="" />
+                        <div className="recommendation-info">
+                            <h4 className="title">{video.title}</h4>
+                            <p className="info">{video.user.firstName}</p>
+                            <p className="info">260M Views · {video.createdAt} </p>
+                        </div>
                     </div>
-                </div>
-                <div className="recommendation-video">
-                    <img className="thumbnail" src="https://i.ytimg.com/vi/U3ASj1L6_sY/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBAUy4A8HQ0WMoqqFsTcuOSrLTguA" alt="" />
-                    <div className="recommendation-info">
-                        <h4 className="title">Adele-Easy On Me</h4>
-                        <p className="info">Adele</p>
-                        <p className="info">260M Views · 5months ago </p>
-                    </div>
-                </div>
-                <div className="recommendation-video">
-                    <img className="thumbnail" src="https://i.ytimg.com/vi/U3ASj1L6_sY/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBAUy4A8HQ0WMoqqFsTcuOSrLTguA" alt="" />
-                    <div className="recommendation-info">
-                        <h4 className="title">Adele-Easy On Me</h4>
-                        <p className="info">Adele</p>
-                        <p className="info">260M Views · 5months ago </p>
-                    </div>
-                </div>
+                )}
 
             </div>
         </main>

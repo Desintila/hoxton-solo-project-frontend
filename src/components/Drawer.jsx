@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom"
 import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
 
@@ -16,13 +17,13 @@ function LeftDrawer({ open, handleDrawer }) {
 
             <div className="logo">
                 <button className="hamburger-icon" onClick={handleDrawer} > <img src="src/assets/menu.svg" alt="Hamburger icon" /></button>
-                <button className="youtube-logo"> <img src="src/assets/logo.svg" alt="Youtube Logo" /></button>
+
             </div>
             <nav >
                 <List>
 
                     <ListItem onClick={() => {
-                        navigate('/home')
+                        navigate('/homepage')
                         handleDrawer()
                     }}>
                         <ListItemButton>
@@ -44,12 +45,35 @@ function LeftDrawer({ open, handleDrawer }) {
                             <ListItemText primary="Watch Later" />
                         </ListItemButton>
                     </ListItem>
+                    <ListItem onClick={() => {
+                        navigate('/liked')
+                        handleDrawer()
+                    }}>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <HomeIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Liked Videos" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem onClick={() => {
+                        navigate('/liked')
+                        handleDrawer()
+                    }}>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <HomeIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Explore" />
+                        </ListItemButton>
+                    </ListItem>
                 </List>
             </nav>
         </Drawer>
     )
 }
 export default LeftDrawer
+
 
 
 
