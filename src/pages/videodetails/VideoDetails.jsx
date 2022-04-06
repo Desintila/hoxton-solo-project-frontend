@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import './videodetails.css'
 
-function VideoDetails({ user, setUser, watchLater, setWatchLater, videos }) {
-    const [video, setVideo] = useState(null)
+function VideoDetails({ user, setUser, watchLater, setWatchLater, videos, video, setVideo }) {
+
     const params = useParams()
     const navigate = useNavigate()
 
@@ -108,9 +108,11 @@ function VideoDetails({ user, setUser, watchLater, setWatchLater, videos }) {
             .then(updatedUser => setUser(updatedUser))
 
     }
-
-
-
+    function dateFormat(video) {
+        const date = Date.parse(video.createdAt)
+        const d = new Date(date).toLocaleDateString()
+        return d
+    }
 
     console.log(video)
     if (video === null) return <h1>Loading...</h1>
@@ -119,13 +121,13 @@ function VideoDetails({ user, setUser, watchLater, setWatchLater, videos }) {
             <div className="selected-video">
                 <video controls width="720" height="380" autoPlay>
 
-                    <source src="http://localhost:4000/public/video1.mp4" type="video/mp4" />
+                    <source src={`http://localhost:4000/${video.url}`} type="video/mp4" />
                 </video>
                 <div className="video-title">
                     <a href="#">#Adele #EasyOnMe</a>
                     <h3>{video.title}</h3>
                     <div className="date">
-                        <span>260,588,400 views · {video.createdAt}</span>
+                        <span>{video.Video_Views.length} views · {`${dateFormat(video)}`}</span>
                         <div className="user-actions">
                             <ul>
                                 <li><button onClick={() => like(video)} className='icons'> <img src="../src/assets/like.svg" alt="" /></button>{video.video_likes.length}</li>
@@ -165,7 +167,7 @@ function VideoDetails({ user, setUser, watchLater, setWatchLater, videos }) {
                         <div className="recommendation-info">
                             <h4 className="title">{video.title}</h4>
                             <p className="info">{video.user.firstName}</p>
-                            <p className="info">260M Views · {video.createdAt} </p>
+                            <p className="info">{video.Video_Views.length} views  · {`${dateFormat(video)}`}</p>
                         </div>
                     </div>
                 )}

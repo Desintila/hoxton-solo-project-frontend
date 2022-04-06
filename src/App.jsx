@@ -12,6 +12,7 @@ import SearchPage from './pages/Search/SearchPage'
 import VideoDetails from './pages/videodetails/VideoDetails'
 import Liked from './pages/WatchLater/LikedVideos'
 import Watch from './pages/WatchLater/Watch'
+import WatchHistory from './pages/WatchLater/WatchHistory'
 
 
 
@@ -22,6 +23,8 @@ function App() {
   const [likedVideos, setLikedVideos] = useState([])
   const [searched, setSearch] = useState([])
   const [videos, setVideos] = useState([])
+  const [watchHistory, setWatchHistory] = useState([])
+  const [video, setVideo] = useState(null)
   useEffect(() => {
     if (localStorage.token) {
       fetch('http://localhost:4000/validate', {
@@ -48,14 +51,15 @@ function App() {
       <Header user={user} setUser={setUser} searched={searched} setSearch={setSearch} />
       <Routes>
         <Route index element={<Navigate replace to='/homepage' />} />
-        <Route path='/homepage' element={<Homepage videos={videos} setVideos={setVideos} />} />
+        <Route path='/homepage' element={<Homepage videos={videos} setVideos={setVideos} video={video} setVideo={setVideo} />} />
         <Route path='/login' element={<Login setUser={setUser} />} />
         <Route path='/signup' element={<Register setUser={setUser} />} />
-        <Route path='/homepage/:id' element={<VideoDetails user={user} setUser={setUser} watchLater={watchLater} videos={videos} setWatchLater={setWatchLater} />} />
+        <Route path='/homepage/:id' element={<VideoDetails user={user} setUser={setUser} watchLater={watchLater} videos={videos} setWatchLater={setWatchLater} video={video} setVideo={setVideo} />} />
         <Route path='/watchlater' element={<Watch watchLater={watchLater} setWatchLater={setWatchLater} />} />
         <Route path='/liked' element={<Liked likedVideos={likedVideos} setLikedVideos={setLikedVideos} />} />
         <Route path='/search' element={<SearchPage searched={searched} setSearch={setSearch} />} />
         <Route path='/profile' element={<Profile user={user} />} />
+        <Route path='/watchHistory' element={<WatchHistory watchHistory={watchHistory} setWatchHistory={setWatchHistory} />} />
       </Routes>
     </div>
   )

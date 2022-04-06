@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Aside from "../../components/Aside"
 import './homepage.css'
-function Homepage({ videos, setVideos }) {
+function Homepage({ videos, setVideos, video, setVideo }) {
 
     const navigate = useNavigate()
 
@@ -11,9 +11,34 @@ function Homepage({ videos, setVideos }) {
             .then(resp => resp.json())
             .then(videos => setVideos(videos))
     }, [])
+
+    function view(video) {
+        fetch(`http://localhost:4000/video_views`, {
+            method: 'POST',
+            headers: {
+                Authorization: localStorage.token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ videoId: video.id })
+        }).then(resp => resp.json())
+            .then((data) => {
+                const updated = JSON.parse(JSON.stringify(video))
+                updated.Video_Views.push(data)
+                setVideo(updated)
+            })
+    }
+
     console.log(videos)
 
-
+    function OnClick(video) {
+        view(video)
+        navigate(`/homepage/${video.id}`)
+    }
+    function dateFormat(video) {
+        const date = Date.parse(video.createdAt)
+        const d = new Date(date).toLocaleDateString()
+        return d
+    }
     return (
 
         <main>
@@ -22,7 +47,7 @@ function Homepage({ videos, setVideos }) {
             <section className="content">
                 {
                     videos.map(video =>
-                        <article key={video.id} className="video" onClick={() => navigate(`/homepage/${video.id}`)}>
+                        <article key={video.id} className="video" onClick={() => OnClick(video)}>
 
                             <img className="thumbnail" src={video.thumbnail} alt="" />
 
@@ -34,7 +59,7 @@ function Homepage({ videos, setVideos }) {
                                     <h3 className="title">{video.title}</h3>
                                     <div className="info">
                                         <div className="channel-name">{video.user.firstName}</div>
-                                        <div className="views">260M Views · {video.createdAt}</div>
+                                        <div className="views">{video.Video_Views.length} views · {`${dateFormat(video)}`}</div>
                                     </div>
                                 </div>
                             </div>

@@ -67,6 +67,17 @@ function LeftDrawer({ open, handleDrawer }) {
                             <ListItemText primary="Explore" />
                         </ListItemButton>
                     </ListItem>
+                    <ListItem onClick={() => {
+                        navigate('/watchHistory')
+                        handleDrawer()
+                    }}>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <HomeIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Watch History" />
+                        </ListItemButton>
+                    </ListItem>
                 </List>
             </nav>
         </Drawer>
