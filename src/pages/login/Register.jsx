@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-
+import './login.css'
 function Register({ setUser }) {
     const navigate = useNavigate()
 
@@ -42,15 +42,28 @@ function Register({ setUser }) {
 
     return (
         <main className="register">
-            <form onSubmit={(e) => handleOnSubmit(e)}>
-                <h2>Register</h2>
-                <input type='text' name='name' placeholder='FirstName' />
-                <input type='text' name='lastname' placeholder='LastName' />
-                <input type='email' name='email' placeholder='Email' />
-                <input type='password' name='password' placeholder='Password' />
-                <input type='text' name='photo' placeholder='Photo' />
-                <input type='submit' />
-            </form>
+            <section className="register-section">
+                <form onSubmit={(e) => handleOnSubmit(e)} className='signup-form'>
+                    <h2 className='register-title'>Register</h2>
+                    <label className='labels'>First Name
+                        <input type='text' name='name' placeholder='First Name' required />
+                    </label>
+                    <label className='labels'>Last Name
+                        <input type='text' name='lastname' placeholder='Last Name' required />
+                    </label>
+                    <label className='labels'>Email
+                        <input type='email' name='email' placeholder='Email' required />
+                    </label>
+                    <label className='labels'>Password
+                        <input type='password' name='password' placeholder='Password' required />
+                    </label>
+                    <label className='labels'> Photo
+                        <input type='text' name='photo' placeholder='Photo' required />
+                    </label>
+                    <input type='submit' />
+                </form>
+            </section>
+
         </main>
     )
 

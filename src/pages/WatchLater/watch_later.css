@@ -1,8 +1,6 @@
 .watch-later {
     display: grid;
     background-color: #f9f9f9;
-    border: 1px solid black;
-
 }
 
 img {
@@ -13,9 +11,6 @@ img {
     display: grid;
     grid-template-columns: 300px 1fr;
     padding: 1rem 2rem;
-
-    border: 1px solid black;
-
 }
 
 .watch {

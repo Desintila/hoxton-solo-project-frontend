@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-
+import './login.css'
 function Login({ setUser }) {
     const navigate = useNavigate()
 
@@ -33,7 +33,7 @@ function Login({ setUser }) {
 
     return (
         <main className="login">
-            <form onSubmit={(e) => handleOnSubmit(e)}>
+            <form onSubmit={(e) => handleOnSubmit(e)} className="login-form">
                 <h2>Login</h2>
                 <input type='email' name='email' placeholder='Email' />
                 <input type='password' name='password' placeholder='Password' />

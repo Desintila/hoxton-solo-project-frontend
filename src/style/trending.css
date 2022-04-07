@@ -1,0 +1,12 @@
+.trending-article {
+    display: grid;
+    background-color: #f9f9f9;
+    grid-template-columns: 400px 1fr;
+    grid-template-rows: 200px;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.trending-article img {
+    height: 200px;
+}

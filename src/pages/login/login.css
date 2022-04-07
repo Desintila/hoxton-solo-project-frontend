@@ -1,0 +1,67 @@
+.main {
+    background-color: #f2f3f4;
+    display: grid;
+    place-items: center;
+    border: 1px solid black;
+}
+
+.register-section {
+    display: grid;
+    justify-content: center;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding-left: 15rem;
+}
+
+.signup-form {
+    -moz-box-shadow: 0 0 3px #ccc;
+    -webkit-box-shadow: 0 0 3px #ccc;
+    box-shadow: 0 0 3px #ccc;
+    padding: 1rem;
+    border-radius: 5px;
+
+    border: 1px solid black;
+}
+
+.register-title {
+    color: black;
+    text-align: center;
+    font-size: 3.5rem;
+    font-family: sans-serif;
+    padding: 1rem;
+}
+
+.labels {
+    display: block;
+    padding: 1rem;
+    color: black;
+    font-family: sans-serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+
+}
+
+.inputs {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+    padding: 10px 1px;
+    margin-top: 1rem;
+    border: 1px solid #000000aa;
+}
+
+input:focus {
+    outline: none;
+}
+
+.submit {
+    width: 100%;
+    background-color: #007ead;
+    border: none;
+    border-radius: 20px;
+    padding: 0.6rem 1rem;
+    color: white;
+    font-size: 1rem;
+    margin-top: 1rem;
+}

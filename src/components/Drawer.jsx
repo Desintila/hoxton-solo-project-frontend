@@ -57,7 +57,7 @@ function LeftDrawer({ open, handleDrawer }) {
                         </ListItemButton>
                     </ListItem>
                     <ListItem onClick={() => {
-                        navigate('/liked')
+                        navigate('/trending')
                         handleDrawer()
                     }}>
                         <ListItemButton>

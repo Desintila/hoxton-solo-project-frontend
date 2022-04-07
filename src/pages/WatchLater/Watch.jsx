@@ -19,6 +19,23 @@ function Watch({ watchLater, setWatchLater }) {
     }, [])
 
 
+    function deleteVideo(video) {
+        fetch(`http://localhost:4000/watchlater/${video.id}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: localStorage.token,
+                'Content-Type': 'application/json'
+            }
+        })
+
+    }
+    function removeVideo(video) {
+        let updated = JSON.parse(JSON.stringify(watchLater))
+        deleteVideo(video)
+        updated = updated.filter(Video => Video.id !== video.id)
+        setWatchLater(updated)
+
+    }
     console.log(watchLater)
     return (
         <main>
@@ -26,12 +43,13 @@ function Watch({ watchLater, setWatchLater }) {
             <section className="watch-later">
                 {
                     watchLater.map(video =>
-                        <article className="watch-wrapper" key={video.id} onClick={() => navigate(`/homepage/${video.id}`)}>
+                        <article className="watch-wrapper" key={video.id} >
 
                             <img src={video.video.thumbnail} alt="" />
                             <div className="watch">
                                 <h4 className="title">{video.video.title}</h4>
-                                <span className="channel-name">{video.video.user.firstName}</span>
+                                <h5 className="channel-name">{video.video.user.firstName}</h5>
+                                <button onClick={() => removeVideo(video)}>Remove</button>
                             </div>
                         </article>
                     )

@@ -28,7 +28,6 @@ function Homepage({ videos, setVideos, video, setVideo }) {
             })
     }
 
-    console.log(videos)
 
     function OnClick(video) {
         view(video)

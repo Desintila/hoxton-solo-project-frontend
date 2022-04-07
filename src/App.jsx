@@ -5,14 +5,16 @@ import './App.css'
 
 import Header from './components/Header'
 import Homepage from './pages/homepage/Homepage'
-import Login from './pages/Login'
+import Login from './pages/login/Login'
 import Profile from './pages/Profile'
-import Register from './pages/Register'
+import Register from './pages/login/Register'
 import SearchPage from './pages/Search/SearchPage'
 import VideoDetails from './pages/videodetails/VideoDetails'
 import Liked from './pages/WatchLater/LikedVideos'
 import Watch from './pages/WatchLater/Watch'
 import WatchHistory from './pages/WatchLater/WatchHistory'
+import Trending from './pages/Trending'
+import Subscriptions from './pages/WatchLater/Subscriptions'
 
 
 
@@ -24,6 +26,7 @@ function App() {
   const [searched, setSearch] = useState([])
   const [videos, setVideos] = useState([])
   const [watchHistory, setWatchHistory] = useState([])
+  const [trending, setTrending] = useState([])
   const [video, setVideo] = useState(null)
   useEffect(() => {
     if (localStorage.token) {
@@ -60,6 +63,8 @@ function App() {
         <Route path='/search' element={<SearchPage searched={searched} setSearch={setSearch} />} />
         <Route path='/profile' element={<Profile user={user} />} />
         <Route path='/watchHistory' element={<WatchHistory watchHistory={watchHistory} setWatchHistory={setWatchHistory} />} />
+        <Route path='/trending' element={<Trending trending={trending} setTrending={setTrending} />} />
+        <Route path='/subscriptions' element={<Subscriptions user={user} />} />
       </Routes>
     </div>
   )
