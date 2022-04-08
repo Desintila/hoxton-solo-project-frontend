@@ -61,7 +61,7 @@ function App() {
         <Route path='/watchlater' element={<Watch watchLater={watchLater} setWatchLater={setWatchLater} />} />
         <Route path='/liked' element={<Liked likedVideos={likedVideos} setLikedVideos={setLikedVideos} />} />
         <Route path='/search' element={<SearchPage searched={searched} setSearch={setSearch} />} />
-        <Route path='/profile' element={<Profile user={user} />} />
+        <Route path='/profile' element={<Profile user={user} setUser={setUser} />} />
         <Route path='/watchHistory' element={<WatchHistory watchHistory={watchHistory} setWatchHistory={setWatchHistory} />} />
         <Route path='/trending' element={<Trending trending={trending} setTrending={setTrending} />} />
         <Route path='/subscriptions' element={<Subscriptions user={user} />} />

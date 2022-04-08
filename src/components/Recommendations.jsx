@@ -14,7 +14,7 @@ function Recommendations({ videos, user }) {
             }).then(resp => resp.json())
                 .then(videos => setRecommend(videos))
         }
-    }, [])
+    }, [params.id])
 
 
     function dateFormat(video) {

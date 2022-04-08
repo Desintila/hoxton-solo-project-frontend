@@ -2,9 +2,35 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import './Tabs.css'
 
-function Tabs({ onInputChange, onSubmit, setDescription, setThumbnail, setTitle, user }) {
+function Tabs({ onInputChange, onSubmit, setDescription, setThumbnail, setTitle, user, setUser }) {
     const [tab, setTab] = useState('home')
     const navigate = useNavigate()
+    function addPost(event) {
+        event.preventDefault()
+        const text = event.target.post.value
+
+        fetch('http://localhost:4000/post', {
+            method: 'POST',
+            headers: {
+                Authorization: localStorage.token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ text: text })
+        })
+            .then(resp => resp.json())
+            .then((data) => {
+                const updated = JSON.parse(JSON.stringify(user))
+                updated.Post.push(data)
+                setUser(updated)
+            })
+        event.target.reset()
+    }
+    function dateFormat(video) {
+        const date = Date.parse(video.createdAt)
+        const d = new Date(date).toLocaleDateString()
+        return d
+    }
+
     return (
         <section className="user-details">
             <div >
@@ -54,7 +80,7 @@ function Tabs({ onInputChange, onSubmit, setDescription, setThumbnail, setTitle,
                                                 <h3 className="title">{video.title}</h3>
                                                 <div className="info">
                                                     <div className="channel-name">{user.firstName}</div>
-                                                    <div className="views">260M Views · {video.createdAt}</div>
+                                                    <div className="views">{video.Video_Views.length} views · {dateFormat(video)}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -66,7 +92,26 @@ function Tabs({ onInputChange, onSubmit, setDescription, setThumbnail, setTitle,
                     </div>
 
                     <div className={`c ${tab === 'community' ? "active-content" : ""}`}>
-                        <h2>Share your posts</h2>
+                        <div className='user-commenting'>
+                            <img className="video-avatar" src={user.image} alt="" />
+                            <form className="comment-form" onSubmit={(event) => addPost(event)} >
+                                <input type="text"
+                                    name="post"
+                                    className="comment-input"
+                                    placeholder={`Share your posts`} />
+                                <button className="comment-button" type="submit">ADD</button>
+                            </form>
+                        </div>
+                        {
+                            user.Post.map(post =>
+                                <div key={post.id} className="commented-div">
+                                    <img className="video-avatar" src={post.user.image} alt="" />
+                                    <div className='comment-info'>
+                                        <span>{post.text}</span>
+                                    </div>
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
             </div>

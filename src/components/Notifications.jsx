@@ -8,7 +8,7 @@ import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import { useNavigate } from 'react-router-dom';
 
-function BasicMenu({ user }) {
+function BasicMenu({ user, setUser }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const navigate = useNavigate()
     const open = Boolean(anchorEl);
@@ -18,6 +18,7 @@ function BasicMenu({ user }) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
 
     return (
         <div>
@@ -43,7 +44,7 @@ function BasicMenu({ user }) {
                     user.notifications.map(message =>
                         <MenuItem onClick={handleClose} key={message.id}>
                             <List>
-                                <ListItem alignItems="flex-start">
+                                <ListItem alignItems="flex-start" >
 
                                     <ListItemText
                                         primary={message.message}

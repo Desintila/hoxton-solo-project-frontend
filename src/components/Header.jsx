@@ -42,14 +42,14 @@ function Header({ user, setUser, searched, setSearch }) {
         <header>
             <div className="logo">
                 <button className="hamburger-icon" onClick={handleDrawer}> <img src="src/assets/menu.svg" alt="Hamburger icon" /></button>
-                <h1>Name</h1>
+                <h1>Logo</h1>
             </div>
             <form onSubmit={(event) => search(event)} className="search" >
                 <input type="search" placeholder="Search" name="searchInput" className="searchInput" />
             </form>
             {user ?
                 <div className="user-notifications">
-                    <BasicMenu user={user} />
+                    <BasicMenu user={user} setUser={setUser} />
                     <AccountMenu logout={logout} user={user} />
                 </div>
                 : <button className="settings" onClick={() => navigate('login')}>

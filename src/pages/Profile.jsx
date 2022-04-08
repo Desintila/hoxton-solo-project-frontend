@@ -2,7 +2,7 @@ import { useState } from "react";
 import Aside from "../components/Aside";
 import Tabs from "../components/Tabs";
 
-function Profile({ user }) {
+function Profile({ user, setUser }) {
     const [file, setFile] = useState(null)
     const [title, setTitle] = useState("")
     const [thumbnail, setThumbnail] = useState("")
@@ -46,7 +46,7 @@ function Profile({ user }) {
                     </div>
 
                 </div>
-                <Tabs user={user} onSubmit={onSubmit} onInputChange={onInputChange} setTitle={setTitle} setDescription={setDescription} setThumbnail={setThumbnail} />
+                <Tabs user={user} setUser={setUser} onSubmit={onSubmit} onInputChange={onInputChange} setTitle={setTitle} setDescription={setDescription} setThumbnail={setThumbnail} />
 
 
             </section>
