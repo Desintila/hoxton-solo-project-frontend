@@ -7,7 +7,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 
@@ -79,12 +78,7 @@ export default function AccountMenu({ logout, user }) {
 
                 <Divider />
 
-                <MenuItem>
-                    <ListItemIcon>
-                        <Settings fontSize="small" />
-                    </ListItemIcon>
-                    Settings
-                </MenuItem>
+
                 <MenuItem onClick={() => logout()}>
                     <ListItemIcon>
                         <Logout fontSize="small" />

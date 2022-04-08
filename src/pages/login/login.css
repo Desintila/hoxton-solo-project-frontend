@@ -1,39 +1,19 @@
-.main {
-    background-color: #f2f3f4;
+.login {
+    background-color: #f9f9f9;
     display: grid;
     place-items: center;
-    border: 1px solid black;
+    height: 100vh;
 }
 
-.register-section {
-    display: grid;
-    justify-content: center;
-    border-radius: 5px;
-    border: 1px solid black;
-    padding-left: 15rem;
+.login-form {
+    padding: 2rem;
+    width: 100%;
+    max-width: 500px;
 }
 
-.signup-form {
-    -moz-box-shadow: 0 0 3px #ccc;
-    -webkit-box-shadow: 0 0 3px #ccc;
-    box-shadow: 0 0 3px #ccc;
-    padding: 1rem;
-    border-radius: 5px;
-
-    border: 1px solid black;
-}
-
-.register-title {
-    color: black;
-    text-align: center;
-    font-size: 3.5rem;
-    font-family: sans-serif;
-    padding: 1rem;
-}
-
-.labels {
+.login-form label {
     display: block;
-    padding: 1rem;
+    padding: 0.5rem;
     color: black;
     font-family: sans-serif;
     font-size: 1.2rem;
@@ -41,27 +21,49 @@
 
 }
 
-.inputs {
+.login-form input[type=email],
+.login-form input[type=password],
+.login-form input[type=text] {
     width: 100%;
     border: none;
-    border-radius: 5px;
     background: transparent;
     padding: 10px 1px;
-    margin-top: 1rem;
-    border: 1px solid #000000aa;
+    border-bottom: 1px solid black;
 }
 
-input:focus {
+.login-form input:focus {
     outline: none;
 }
 
-.submit {
-    width: 100%;
-    background-color: #007ead;
+.login-form input[type=submit] {
+    width: 90%;
+    background-color: black;
     border: none;
-    border-radius: 20px;
     padding: 0.6rem 1rem;
     color: white;
     font-size: 1rem;
-    margin-top: 1rem;
+    border-radius: 25px;
+    margin-left: 1rem;
+}
+
+.login-form h2 {
+    color: black;
+    text-align: center;
+    font-size: 3.5rem;
+    font-family: sans-serif;
+    padding: 0.5rem;
+}
+
+.login-form button {
+    text-decoration: none;
+    color: black;
+    padding: 1rem;
+    font-size: 1rem;
+    font-family: sans-serif;
+    background-color: transparent;
+    border: none;
+}
+
+.login-form button:hover {
+    text-decoration: underline;
 }

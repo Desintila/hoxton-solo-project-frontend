@@ -41,7 +41,7 @@ function BasicMenu({ user }) {
             >
                 {
                     user.notifications.map(message =>
-                        <MenuItem onClick={handleClose}>
+                        <MenuItem onClick={handleClose} key={message.id}>
                             <List>
                                 <ListItem alignItems="flex-start">
 
@@ -58,5 +58,4 @@ function BasicMenu({ user }) {
         </div>
     )
 }
-
 export default BasicMenu

@@ -1,12 +1,13 @@
-
-import { useNavigate } from "react-router-dom"
 import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
-
-import HomeIcon from '@mui/icons-material/Home'
-
-
-
+import { useNavigate } from "react-router-dom"
+import RestoreOutlinedIcon from '@mui/icons-material/RestoreOutlined';
+import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
+import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
+import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 function LeftDrawer({ open, handleDrawer }) {
+
+
     const navigate = useNavigate()
     const drawerWidth = 300
 
@@ -28,7 +29,7 @@ function LeftDrawer({ open, handleDrawer }) {
                     }}>
                         <ListItemButton>
                             <ListItemIcon>
-                                <HomeIcon />
+                                <HomeOutlinedIcon />
                             </ListItemIcon>
                             <ListItemText primary="Home" />
                         </ListItemButton>
@@ -40,7 +41,7 @@ function LeftDrawer({ open, handleDrawer }) {
                     }}>
                         <ListItemButton>
                             <ListItemIcon>
-                                <HomeIcon />
+                                <WatchLaterOutlinedIcon />
                             </ListItemIcon>
                             <ListItemText primary="Watch Later" />
                         </ListItemButton>
@@ -51,7 +52,7 @@ function LeftDrawer({ open, handleDrawer }) {
                     }}>
                         <ListItemButton>
                             <ListItemIcon>
-                                <HomeIcon />
+                                <ThumbUpOutlinedIcon />
                             </ListItemIcon>
                             <ListItemText primary="Liked Videos" />
                         </ListItemButton>
@@ -62,7 +63,7 @@ function LeftDrawer({ open, handleDrawer }) {
                     }}>
                         <ListItemButton>
                             <ListItemIcon>
-                                <HomeIcon />
+                                <ExploreOutlinedIcon />
                             </ListItemIcon>
                             <ListItemText primary="Explore" />
                         </ListItemButton>
@@ -73,7 +74,7 @@ function LeftDrawer({ open, handleDrawer }) {
                     }}>
                         <ListItemButton>
                             <ListItemIcon>
-                                <HomeIcon />
+                                <RestoreOutlinedIcon />
                             </ListItemIcon>
                             <ListItemText primary="Watch History" />
                         </ListItemButton>
@@ -84,7 +85,6 @@ function LeftDrawer({ open, handleDrawer }) {
     )
 }
 export default LeftDrawer
-
 
 
 

@@ -32,16 +32,20 @@ function Login({ setUser }) {
     }
 
     return (
-        <main className="login">
+        <section className="login">
             <form onSubmit={(e) => handleOnSubmit(e)} className="login-form">
                 <h2>Login</h2>
-                <input type='email' name='email' placeholder='Email' />
-                <input type='password' name='password' placeholder='Password' />
+                <label htmlFor="">Email
+                    <input type='email' name='email' placeholder='Email' />
+                </label>
+                <label htmlFor="">Password
+                    <input type='password' name='password' placeholder='Password' />
+                </label>
                 <input type='submit' />
                 <button onClick={() => navigate('/signup')}>Don't have an account?</button>
             </form>
+        </section>
 
-        </main>
     )
 
 }

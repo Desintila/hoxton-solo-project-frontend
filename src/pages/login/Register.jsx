@@ -41,31 +41,27 @@ function Register({ setUser }) {
     }
 
     return (
-        <main className="register">
-            <section className="register-section">
-                <form onSubmit={(e) => handleOnSubmit(e)} className='signup-form'>
-                    <h2 className='register-title'>Register</h2>
-                    <label className='labels'>First Name
-                        <input type='text' name='name' placeholder='First Name' required />
-                    </label>
-                    <label className='labels'>Last Name
-                        <input type='text' name='lastname' placeholder='Last Name' required />
-                    </label>
-                    <label className='labels'>Email
-                        <input type='email' name='email' placeholder='Email' required />
-                    </label>
-                    <label className='labels'>Password
-                        <input type='password' name='password' placeholder='Password' required />
-                    </label>
-                    <label className='labels'> Photo
-                        <input type='text' name='photo' placeholder='Photo' required />
-                    </label>
-                    <input type='submit' />
-                </form>
-            </section>
-
-        </main>
-    )
+        <section className="login">
+            <form onSubmit={(e) => handleOnSubmit(e)} className='login-form'>
+                <h2 >Register</h2>
+                <label className='labels'>First Name
+                    <input type='text' name='name' placeholder='First Name' required />
+                </label>
+                <label className='labels'>Last Name
+                    <input type='text' name='lastname' placeholder='Last Name' required />
+                </label>
+                <label className='labels'>Email
+                    <input type='email' name='email' placeholder='Email' required />
+                </label>
+                <label className='labels'>Password
+                    <input type='password' name='password' placeholder='Password' required />
+                </label>
+                <label className='labels'> Photo
+                    <input type='text' name='photo' placeholder='Photo' required />
+                </label>
+                <input type='submit' />
+            </form>
+        </section>)
 
 }
 
