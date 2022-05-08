@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import Aside from "../../components/Aside"
 import './watch_later.css'
 
-function Liked({ likedVideos, setLikedVideos }) {
+function Liked({ likedVideos, setLikedVideos, user }) {
     const navigate = useNavigate()
 
 
@@ -18,27 +18,31 @@ function Liked({ likedVideos, setLikedVideos }) {
         }
     }, [])
 
+    if (user != null) {
+        return (
+            <main>
+                <Aside />
+                <section className="watch-later">
+                    {
+                        likedVideos.map(video =>
+                            <article className="watch-wrapper" key={video.id} onClick={() => navigate(`/homepage/${video.id}`)}>
 
-    return (
-        <main>
-            <Aside />
-            <section className="watch-later">
-                {
-                    likedVideos.map(video =>
-                        <article className="watch-wrapper" key={video.id} onClick={() => navigate(`/homepage/${video.id}`)}>
+                                <img src={video.video.thumbnail} alt="" />
+                                <div className="watch">
+                                    <h4 className="title">{video.video.title}</h4>
+                                    <span className="channel-name">{video.video.user.firstName}</span>
+                                </div>
+                            </article>
+                        )
+                    }
 
-                            <img src={video.video.thumbnail} alt="" />
-                            <div className="watch">
-                                <h4 className="title">{video.video.title}</h4>
-                                <span className="channel-name">{video.video.user.firstName}</span>
-                            </div>
-                        </article>
-                    )
-                }
-
-            </section>
-        </main>
-    )
+                </section>
+            </main>
+        )
+    } else {
+        return <main><Aside />
+            You need to login</main>
+    }
 }
 
 

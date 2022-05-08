@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import Aside from "../../components/Aside"
 import './watch_later.css'
 
-function Watch({ watchLater, setWatchLater }) {
+function Watch({ watchLater, setWatchLater, user }) {
     const navigate = useNavigate()
 
 
@@ -37,27 +37,32 @@ function Watch({ watchLater, setWatchLater }) {
 
     }
     console.log(watchLater)
-    return (
-        <main>
-            <Aside />
-            <section className="watch-later">
-                {
-                    watchLater.map(video =>
-                        <article className="watch-wrapper" key={video.id} >
+    if (user != null) {
+        return (
+            <main>
+                <Aside />
+                <section className="watch-later">
+                    {
+                        watchLater.map(video =>
+                            <article className="watch-wrapper" key={video.id} >
 
-                            <img src={video.video.thumbnail} alt="" />
-                            <div className="watch">
-                                <h4 className="title">{video.video.title}</h4>
-                                <h5 className="channel-name">{video.video.user.firstName}</h5>
-                                <button onClick={() => removeVideo(video)}>Remove</button>
-                            </div>
-                        </article>
-                    )
-                }
+                                <img src={video.video.thumbnail} alt="" />
+                                <div className="watch">
+                                    <h4 className="title">{video.video.title}</h4>
+                                    <h5 className="channel-name">{video.video.user.firstName}</h5>
+                                    <button onClick={() => removeVideo(video)}>Remove</button>
+                                </div>
+                            </article>
+                        )
+                    }
 
-            </section>
-        </main>
-    )
+                </section>
+            </main>
+        )
+    } else {
+        return <main><Aside />
+            You need to login</main>
+    }
 }
 
 

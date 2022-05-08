@@ -53,18 +53,20 @@ function App() {
 
       <Header user={user} setUser={setUser} searched={searched} setSearch={setSearch} />
       <Routes>
-        <Route index element={<Navigate replace to='/homepage' />} />
-        <Route path='/homepage' element={<Homepage videos={videos} setVideos={setVideos} video={video} setVideo={setVideo} />} />
+
         <Route path='/login' element={<Login setUser={setUser} />} />
         <Route path='/signup' element={<Register setUser={setUser} />} />
         <Route path='/homepage/:id' element={<VideoDetails user={user} setUser={setUser} watchLater={watchLater} videos={videos} setWatchLater={setWatchLater} video={video} setVideo={setVideo} />} />
-        <Route path='/watchlater' element={<Watch watchLater={watchLater} setWatchLater={setWatchLater} />} />
-        <Route path='/liked' element={<Liked likedVideos={likedVideos} setLikedVideos={setLikedVideos} />} />
+        <Route path='/watchlater' element={<Watch user={user} watchLater={watchLater} setWatchLater={setWatchLater} />} />
+        <Route path='/liked' element={<Liked likedVideos={likedVideos} setLikedVideos={setLikedVideos} user={user} />} />
         <Route path='/search' element={<SearchPage searched={searched} setSearch={setSearch} />} />
         <Route path='/profile' element={<Profile user={user} setUser={setUser} />} />
-        <Route path='/watchHistory' element={<WatchHistory watchHistory={watchHistory} setWatchHistory={setWatchHistory} />} />
-        <Route path='/trending' element={<Trending trending={trending} setTrending={setTrending} />} />
+        <Route path='/watchHistory' element={<WatchHistory watchHistory={watchHistory} setWatchHistory={setWatchHistory} user={user} />} />
+        <Route path='/trending' element={<Trending trending={trending} setTrending={setTrending} user={user} />} />
         <Route path='/subscriptions' element={<Subscriptions user={user} />} />
+
+        <Route path='/homepage' element={<Homepage videos={videos} setVideos={setVideos} video={video} setVideo={setVideo} />} />
+        <Route index element={<Navigate replace to='/homepage' />} />
       </Routes>
     </div>
   )

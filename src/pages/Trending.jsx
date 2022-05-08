@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import Aside from "../components/Aside"
 import '../style/trending.css'
 
-function Trending({ trending, setTrending }) {
+function Trending({ trending, setTrending, user }) {
     const navigate = useNavigate()
     useEffect(() => {
         if (localStorage.token) {
@@ -16,29 +16,34 @@ function Trending({ trending, setTrending }) {
         }
     }, [])
     console.log(trending)
-    return (
-        <main>
-            <Aside />
-            <section className="trending">
-                <h3>Trendings</h3>
-                {
-                    trending.map(video =>
-                        <article className="trending-article" key={video.id} onClick={() => navigate(`/homepage/${video.id}`)}>
+    if (user != null) {
+        return (
+            <main>
+                <Aside />
+                <section className="trending">
+                    <h3>Trendings</h3>
+                    {
+                        trending.map(video =>
+                            <article className="trending-article" key={video.id} onClick={() => navigate(`/homepage/${video.id}`)}>
 
-                            <img src={video.thumbnail} alt="" />
-                            <div className="watch">
-                                <h4 className="title">{video.title}</h4>
-                                <div>
-                                    <span className="channel-name">{video.user.firstName}</span>
-                                    <h5 className="channel-name">{video.Video_Views.length} views</h5>
+                                <img src={video.thumbnail} alt="" />
+                                <div className="watch">
+                                    <h4 className="title">{video.title}</h4>
+                                    <div>
+                                        <span className="channel-name">{video.user.firstName}</span>
+                                        <h5 className="channel-name">{video.Video_Views.length} views</h5>
+                                    </div>
                                 </div>
-                            </div>
-                        </article>
-                    )
-                }
+                            </article>
+                        )
+                    }
 
-            </section>
-        </main>
-    )
+                </section>
+            </main>
+        )
+    } else {
+        return <main><Aside />
+            You need to login</main>
+    }
 }
 export default Trending

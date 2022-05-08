@@ -8,9 +8,6 @@ function VideoDetails({ user, setUser, watchLater, setWatchLater, videos, video,
 
     const params = useParams()
     const navigate = useNavigate()
-
-
-
     useEffect(() => {
         fetch(`http://localhost:4000/videos/${params.id}`)
             .then(resp => resp.json())
@@ -19,8 +16,6 @@ function VideoDetails({ user, setUser, watchLater, setWatchLater, videos, video,
 
     function like(video, user) {
         if (user !== null) {
-
-
             fetch(`http://localhost:4000/video_likes`, {
                 method: 'POST',
                 headers: {
@@ -30,9 +25,15 @@ function VideoDetails({ user, setUser, watchLater, setWatchLater, videos, video,
                 body: JSON.stringify({ videoId: video.id })
             }).then(resp => resp.json())
                 .then((data) => {
-                    const updated = JSON.parse(JSON.stringify(video))
-                    updated.video_likes.push(data)
-                    setVideo(updated)
+                    if (data.error) {
+                        alert(data.error)
+                    }
+                    else {
+                        const updated = JSON.parse(JSON.stringify(video))
+                        updated.video_likes.liked = true
+                        updated.video_likes.push(data)
+                        setVideo(updated)
+                    }
                 })
 
         }
@@ -40,11 +41,8 @@ function VideoDetails({ user, setUser, watchLater, setWatchLater, videos, video,
             alert('You need to login')
         }
     }
-
     function commentLike(comment) {
         if (user !== null) {
-
-
             fetch(`http://localhost:4000/comment_likes`, {
                 method: 'POST',
                 headers: {
@@ -54,11 +52,16 @@ function VideoDetails({ user, setUser, watchLater, setWatchLater, videos, video,
                 body: JSON.stringify({ commentId: comment.id })
             }).then(resp => resp.json())
                 .then((data) => {
-                    const updated = JSON.parse(JSON.stringify(video))
-                    const commentIndex = updated.comments.findIndex(item =>
-                        item.id === comment.id)
-                    updated.comments[commentIndex].comment_likes.push(data)
-                    setVideo(updated)
+                    if (data.error) {
+                        alert(data.error)
+                    }
+                    else {
+                        const updated = JSON.parse(JSON.stringify(video))
+                        const commentIndex = updated.comments.findIndex(item =>
+                            item.id === comment.id)
+                        updated.comments[commentIndex].comment_likes.push(data)
+                        setVideo(updated)
+                    }
                 })
         }
         else {
@@ -79,11 +82,16 @@ function VideoDetails({ user, setUser, watchLater, setWatchLater, videos, video,
                 body: JSON.stringify({ commentId: comment.id })
             }).then(resp => resp.json())
                 .then((data) => {
-                    const updated = JSON.parse(JSON.stringify(video))
-                    const commentIndex = updated.comments.findIndex(item =>
-                        item.id === comment.id)
-                    updated.comments[commentIndex].comment_dislikes.push(data)
-                    setVideo(updated)
+                    if (data.error) {
+                        alert(data.error)
+                    }
+                    else {
+                        const updated = JSON.parse(JSON.stringify(video))
+                        const commentIndex = updated.comments.findIndex(item =>
+                            item.id === comment.id)
+                        updated.comments[commentIndex].comment_dislikes.push(data)
+                        setVideo(updated)
+                    }
                 })
         }
         else {
@@ -102,9 +110,14 @@ function VideoDetails({ user, setUser, watchLater, setWatchLater, videos, video,
                 body: JSON.stringify({ videoId: video.id })
             }).then(resp => resp.json())
                 .then((data) => {
-                    const updated = JSON.parse(JSON.stringify(video))
-                    updated.video_dislikes.push(data)
-                    setVideo(updated)
+                    if (data.error) {
+                        alert(data.error)
+                    }
+                    else {
+                        const updated = JSON.parse(JSON.stringify(video))
+                        updated.video_dislikes.push(data)
+                        setVideo(updated)
+                    }
                 })
         }
         else {
@@ -134,21 +147,26 @@ function VideoDetails({ user, setUser, watchLater, setWatchLater, videos, video,
 
 
     function watch(video) {
-        fetch('http://localhost:4000/watch_later', {
-            method: 'POST',
-            headers: {
-                Authorization: localStorage.token,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ videoId: video.id })
-        })
-            .then(resp => resp.json())
-            .then((data) => {
-                const updated = JSON.parse(JSON.stringify(watchLater))
-                updated.push(data)
-                setWatchLater(updated)
-
+        if (user !== null) {
+            fetch('http://localhost:4000/watch_later', {
+                method: 'POST',
+                headers: {
+                    Authorization: localStorage.token,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ videoId: video.id })
             })
+                .then(resp => resp.json())
+                .then((data) => {
+                    const updated = JSON.parse(JSON.stringify(watchLater))
+                    updated.push(data)
+                    setWatchLater(updated)
+
+                })
+        }
+        else {
+            alert('You need to login')
+        }
     }
 
     function subscribe(user) {
@@ -163,7 +181,6 @@ function VideoDetails({ user, setUser, watchLater, setWatchLater, videos, video,
             .then(updatedUser => setUser(updatedUser))
 
     }
-
 
 
     function dateFormat(video) {
@@ -183,9 +200,7 @@ function VideoDetails({ user, setUser, watchLater, setWatchLater, videos, video,
                     <div>
                         <FocusedContent.Component>
 
-                            <video controls width="720" height="380" autoPlay>
-
-                                <source src={`http://localhost:4000/${video.url}`} type="video/mp4" />
+                            <video controls width="720" height="380" autoPlay src={`http://localhost:4000/${video.url}`}>
                             </video>
                         </FocusedContent.Component>
                     </div>
@@ -205,7 +220,7 @@ function VideoDetails({ user, setUser, watchLater, setWatchLater, videos, video,
 
                             <div className="user-actions">
                                 <ul>
-                                    <li><button onClick={() => { like(video, user) }} className='icons'>{video.video_likes.liked = true ? <img src="../src/assets/like.svg" alt="" /> : <img src="../src/assets/liked.svg" alt=" icon" />}</button>{video.video_likes.length}</li>
+                                    <li><button onClick={() => { like(video, user) }} className='icons'>{video.video_likes.liked === true ? <img src="../src/assets/liked.svg" alt=" icon" /> : <img src="../src/assets/like.svg" alt="" />}</button>{video.video_likes.length}</li>
                                     <li><button onClick={() => dislike(video)} className='icons'> <img src="../src/assets/dislike.svg" alt="dislike icon" /></button>DISLIKE</li>
                                     <li><button onClick={() => watch(video)} className='icons'><img src="../src/assets/save.svg" alt="save icon" /></button>SAVE</li>
                                     <li><button className='switch' onClick={() => FocusedContent.switchOff()}> Switch Off Light</button></li>
@@ -220,7 +235,7 @@ function VideoDetails({ user, setUser, watchLater, setWatchLater, videos, video,
                             <h4>{video.user.firstName}</h4>
                             <p>{video.description}</p>
                         </div>
-                        <button onClick={() => subscribe(video.user)}>SUBSCRIBE</button>
+                        <button onClick={() => { user ? subscribe(video.user) : alert('You need to login') }}>SUBSCRIBE</button>
                     </div>
 
 
@@ -228,7 +243,7 @@ function VideoDetails({ user, setUser, watchLater, setWatchLater, videos, video,
 
                         <div>
                             <h3>{video.comments.length} comments</h3>
-                            <div className='user-commenting'>
+                            {user ? <div className='user-commenting'>
                                 <img className="video-avatar" src={user.image} alt="" />
                                 <form className="comment-form" onSubmit={(event) => addComment(event, video.id)}>
                                     <input type="text"
@@ -237,7 +252,7 @@ function VideoDetails({ user, setUser, watchLater, setWatchLater, videos, video,
                                         placeholder={`Commenting as ${user.firstName} `} />
                                     <button className="comment-button" type="submit">ADD</button>
                                 </form>
-                            </div>
+                            </div> : null}
                             <div>
                                 {video.comments.map(comment =>
                                     <div key={comment.id} className="commented-div">
@@ -254,7 +269,7 @@ function VideoDetails({ user, setUser, watchLater, setWatchLater, videos, video,
                     </div>
 
                 </div>
-                <Recommendations videos={videos} user={user} />
+                <Recommendations />
             </main>
         </FocusedContent.LightZone>
     )

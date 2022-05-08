@@ -38,6 +38,10 @@ function Subscriptions({ user }) {
                 </section>
             </main>
         )
+    } else {
+        return <main><Aside />
+            You need to login</main>
     }
+
 }
 export default Subscriptions
